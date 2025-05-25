@@ -17,6 +17,12 @@ export default defineConfig({
     reporter: 'html',
     /* 모든 테스트에 공통으로 적용할 설정 */
     use: {
+        /* 느린 모드 설정 - SLOW_MO 환경변수가 설정된 경우에만 활성화 */
+        ...(process.env.SLOW_MO && {
+            launchOptions: {
+                slowMo: parseInt(process.env.SLOW_MO) || 1000
+            }
+        }),
         /* 실패한 테스트의 스크린샷 수집 */
         screenshot: 'only-on-failure',
         /* 실패한 테스트의 비디오 수집 */

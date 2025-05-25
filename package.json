@@ -7,7 +7,10 @@
         "test": "playwright test",
         "test:headed": "playwright test --headed",
         "test:ui": "playwright test --ui",
-        "test:debug": "playwright test --debug"
+        "test:debug": "playwright test --debug",
+        "test:slow": "SLOW_MO=1000 playwright test --headed",
+        "test:slow:ui": "SLOW_MO=1000 playwright test --ui",
+        "test:slow:debug": "SLOW_MO=1000 playwright test --debug"
     },
     "keywords": [
         "playwright",
