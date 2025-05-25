@@ -1,8 +1,12 @@
 {
     "mcpServers": {
-        "playwright": {
+        "time": {
             "command": "docker",
-            "args": ["run", "-i", "--rm", "--init", "mcp/playwright"]
+            "args": ["run", "-i", "--rm", "--init", "mcp/time"]
+        },
+        "playwright": {
+            "command": "npx",
+            "args": ["@playwright/mcp@latest"]
         }
     }
 }
