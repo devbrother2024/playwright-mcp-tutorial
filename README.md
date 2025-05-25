@@ -1,116 +1,170 @@
-# 노트앱 회원가입 및 로그인 테스트
+# Playwright MCP Tutorial
 
-[Practice Expand Testing](https://practice.expandtesting.com/notes/app/) 노트 애플리케이션에서 회원가입 후 로그인이 정상적으로 동작하는지 확인하는 Playwright 자동화 테스트입니다.
+AutomationExercise 웹사이트에서 회원가입 및 로그인 테스트를 위한 Playwright 자동화 테스트 프로젝트입니다.
 
-## 테스트 시나리오
+## 📋 프로젝트 개요
 
-### 주요 테스트 케이스
+이 프로젝트는 Playwright MCP(Model Context Protocol) 도구를 활용하여 실제 웹사이트에서 사용자 회원가입부터 계정 삭제까지의 전체 플로우를 자동화 테스트하는 튜토리얼 프로젝트입니다.
 
-1. **회원가입 후 로그인 테스트**
+### 🎯 테스트 대상
 
-    - 노트앱 메인 페이지 접속
-    - 회원가입 페이지로 이동
-    - 회원가입 폼 작성 (이메일, 이름, 비밀번호, 비밀번호 확인)
-    - 회원가입 완료 확인
-    - 로그인 페이지로 이동
-    - 로그인 폼 작성 (이메일, 비밀번호)
-    - 로그인 성공 확인
-    - 로그아웃 테스트
+- **웹사이트**: [AutomationExercise](http://automationexercise.com)
+- **테스트 범위**: 회원가입, 로그인, 계정 삭제
 
-2. **잘못된 로그인 정보 테스트**
-    - 존재하지 않는 계정으로 로그인 시도
-    - 오류 처리 확인
+## 🚀 시작하기
 
-## 설치 및 실행
+### 필수 요구사항
 
-### 1. 의존성 설치
+- Node.js (v16 이상)
+- npm 또는 yarn
+
+### 설치
+
+1. 저장소 클론
+
+```bash
+git clone <repository-url>
+cd playwright-mcp-tutorial
+```
+
+2. 의존성 설치
 
 ```bash
 npm install
 ```
 
-### 2. Playwright 브라우저 설치
+3. Playwright 브라우저 설치
 
 ```bash
 npx playwright install
 ```
 
-### 3. 테스트 실행
+## 🧪 테스트 실행
 
-#### 기본 테스트 실행 (헤드리스 모드)
+### 기본 테스트 실행
 
 ```bash
+# 헤드리스 모드로 테스트 실행
 npm test
-```
 
-#### 브라우저 UI와 함께 테스트 실행
-
-```bash
+# 브라우저를 보면서 테스트 실행
 npm run test:headed
-```
 
-#### Playwright UI 모드로 테스트 실행
-
-```bash
+# UI 모드로 테스트 실행 (대화형)
 npm run test:ui
-```
 
-#### 디버그 모드로 테스트 실행
-
-```bash
+# 디버그 모드로 테스트 실행
 npm run test:debug
 ```
 
-#### 느린 모드로 테스트 실행 (각 액션 사이에 1초 지연)
+### 느린 모드 테스트 (시연용)
 
 ```bash
-# 느린 모드 + 브라우저 표시
+# 1초 지연으로 Chrome에서 실행
 npm run test:slow
 
-# 느린 모드 + UI 모드
+# 느린 모드 + UI
 npm run test:slow:ui
 
-# 느린 모드 + 디버그 모드
+# 느린 모드 + 디버그
 npm run test:slow:debug
 ```
 
-#### 사용자 정의 느린 모드 (지연 시간 조정)
+## 📁 프로젝트 구조
+
+```
+playwright-mcp-tutorial/
+├── tests/                          # 테스트 파일들
+│   ├── user-registration-login.spec.ts  # 메인 테스트 (TypeScript)
+│   └── signup-login.spec.js            # 추가 테스트 (JavaScript)
+├── scenario/                       # 테스트 시나리오 문서
+│   └── signup-login.md             # 회원가입/로그인 시나리오
+├── test-results/                   # 테스트 결과 (자동 생성)
+├── playwright-report/              # HTML 리포트 (자동 생성)
+├── playwright.config.ts            # Playwright 설정
+├── package.json                    # 프로젝트 설정 및 의존성
+└── README.md                       # 프로젝트 문서
+```
+
+## 🔧 설정
+
+### Playwright 설정 (`playwright.config.ts`)
+
+- **멀티 브라우저 지원**: Chrome, Firefox, Safari
+- **병렬 실행**: 성능 최적화
+- **스크린샷/비디오**: 실패 시 자동 캡처
+- **느린 모드**: 시연 및 디버깅용
+- **팝업/광고 차단**: 안정적인 테스트 환경
+
+### 주요 기능
+
+- ✅ **실시간 이메일 생성**: 타임스탬프 기반 고유 이메일
+- ✅ **완전한 사용자 플로우**: 회원가입 → 로그인 → 계정 삭제
+- ✅ **다국어 지원**: 한국어 테스트 데이터
+- ✅ **강력한 선택자**: Role-based 및 텍스트 기반 locator
+- ✅ **에러 처리**: 실패 시 스크린샷 및 비디오 캡처
+
+## 📝 테스트 시나리오
+
+### 회원가입 및 로그인 테스트
+
+1. **홈페이지 접속** - AutomationExercise 웹사이트 방문
+2. **회원가입 페이지 이동** - 'Signup / Login' 버튼 클릭
+3. **신규 사용자 등록** - 고유 이메일로 회원가입
+4. **계정 정보 입력** - 개인정보, 주소, 선택사항 입력
+5. **계정 생성 확인** - 성공 메시지 확인
+6. **로그인 상태 확인** - 사용자명 표시 확인
+7. **로그아웃/재로그인** - 로그인 기능 검증
+8. **계정 삭제** - 전체 플로우 완료
+
+### 테스트 데이터
+
+```typescript
+// 동적 이메일 생성
+const timestamp = new Date().toISOString().replace(/[-:.]/g, '').slice(0, 14)
+const testEmail = `testuser${timestamp}@example.com`
+
+// 테스트 사용자 정보
+const testPassword = 'testpassword123'
+const testName = '테스트사용자'
+```
+
+## 🛠️ 개발 가이드
+
+### 새로운 테스트 추가
+
+1. `tests/` 디렉토리에 `.spec.ts` 파일 생성
+2. 시나리오를 `scenario/` 디렉토리에 문서화
+3. Playwright 모범 사례 준수:
+    - Role-based locator 사용
+    - 명시적 대기 (waitFor) 활용
+    - 페이지 객체 모델 고려
+
+### 디버깅 팁
 
 ```bash
-# 500ms 지연
-SLOW_MO=500 npm run test:headed
+# 특정 테스트만 실행
+npx playwright test user-registration-login.spec.ts
 
-# 2초 지연
-SLOW_MO=2000 npm run test:headed
+# 브라우저 개발자 도구와 함께 실행
+npx playwright test --debug
+
+# 특정 브라우저에서만 실행
+npx playwright test --project=chromium
 ```
 
-## 테스트 파일 구조
+## 📊 리포트
 
+테스트 실행 후 HTML 리포트가 자동으로 생성됩니다:
+
+```bash
+# 리포트 보기
+npx playwright show-report
 ```
-├── tests/
-│   └── notes-app-registration-login.spec.ts  # 메인 테스트 파일
-├── playwright.config.ts                      # Playwright 설정
-├── package.json                              # 프로젝트 의존성
-└── README.md                                 # 프로젝트 설명
-```
 
-## 테스트 특징
+리포트에는 다음이 포함됩니다:
 
-- **고유한 테스트 데이터**: 각 테스트 실행마다 타임스탬프를 사용하여 고유한 이메일 주소 생성
-- **다중 브라우저 지원**: Chromium, Firefox, WebKit에서 테스트 실행
-- **스크린샷 및 비디오**: 실패한 테스트의 스크린샷과 비디오 자동 수집
-- **상세한 검증**: 각 단계별로 UI 요소와 상태 확인
-- **느린 모드 지원**: 테스트 과정을 천천히 관찰할 수 있는 느린 모드 제공
-
-## 테스트 데이터
-
-- **이메일**: `test.user.{timestamp}@example.com`
-- **이름**: `Test User`
-- **비밀번호**: `TestPassword123!`
-
-## 주의사항
-
-- 테스트는 실제 웹사이트 (https://practice.expandtesting.com/notes/app/)에서 실행됩니다
-- 각 테스트 실행마다 새로운 계정이 생성됩니다
-- 네트워크 연결이 필요합니다
-- 느린 모드는 테스트 시간을 늘리므로 개발/디버깅 목적으로만 사용하세요
+- 테스트 결과 요약
+- 실패한 테스트의 스크린샷
+- 실행 비디오 (실패 시)
+- 상세한 실행 로그
