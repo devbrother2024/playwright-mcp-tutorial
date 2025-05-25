@@ -30,24 +30,74 @@ export default defineConfig({
         /* 베이스 URL */
         baseURL: 'https://practice.expandtesting.com',
         /* 추적 수집 설정 */
-        trace: 'on-first-retry'
+        trace: 'on-first-retry',
+        /* 브라우저 컨텍스트 설정 - 팝업 차단 */
+        contextOptions: {
+            /* 지리적 위치 차단 */
+            geolocation: undefined,
+            /* 알림 등 권한 차단 */
+            permissions: ['notifications'],
+            /* 광고 차단을 위한 추가 설정 */
+            bypassCSP: true
+        },
+        /* 광고 및 팝업 차단 설정 */
+        extraHTTPHeaders: {
+            'Accept-Language': 'ko-KR,ko;q=0.9,en;q=0.8'
+        },
+        /* 팝업 자동 차단 */
+        ignoreHTTPSErrors: true
     },
 
     /* 다양한 브라우저에서 테스트 실행 설정 */
     projects: [
         {
             name: 'chromium',
-            use: { ...devices['Desktop Chrome'] }
+            use: {
+                ...devices['Desktop Chrome'],
+                /* Chrome 특정 설정 - 광고 및 팝업 차단 */
+                launchOptions: {
+                    args: [
+                        '--disable-popup-blocking=false',
+                        '--disable-extensions-except',
+                        '--disable-extensions',
+                        '--disable-plugins',
+                        '--disable-dev-shm-usage',
+                        '--no-sandbox',
+                        '--disable-setuid-sandbox',
+                        '--disable-web-security',
+                        '--disable-features=VizDisplayCompositor',
+                        '--block-new-web-contents'
+                    ]
+                }
+            }
         },
 
         {
             name: 'firefox',
-            use: { ...devices['Desktop Firefox'] }
+            use: {
+                ...devices['Desktop Firefox'],
+                /* Firefox 특정 설정 */
+                launchOptions: {
+                    firefoxUserPrefs: {
+                        'dom.popup_maximum': 0,
+                        'privacy.popups.showBrowserMessage': false,
+                        'dom.disable_open_during_load': true,
+                        'browser.link.open_newwindow': 1,
+                        'browser.link.open_newwindow.restriction': 0
+                    }
+                }
+            }
         },
 
         {
             name: 'webkit',
-            use: { ...devices['Desktop Safari'] }
+            use: {
+                ...devices['Desktop Safari'],
+                /* Safari 특정 설정 */
+                launchOptions: {
+                    args: ['--disable-popup-blocking=false']
+                }
+            }
         }
 
         /* 모바일 브라우저 테스트 */
