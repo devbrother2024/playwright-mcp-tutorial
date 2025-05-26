@@ -9,7 +9,6 @@ AutomationExercise 웹사이트에서 회원가입 및 로그인 테스트를 �
 ### 🎯 테스트 대상
 
 - **웹사이트**: [AutomationExercise](http://automationexercise.com)
-- **테스트 범위**: 회원가입, 로그인, 계정 삭제
 
 ## 🚀 시작하기
 
@@ -75,8 +74,8 @@ npm run test:slow:debug
 ```
 playwright-mcp-tutorial/
 ├── tests/                          # 테스트 파일들
-│   ├── user-registration-login.spec.ts  # 메인 테스트 (TypeScript)
-│   └── signup-login.spec.js            # 추가 테스트 (JavaScript)
+│   ├── user-registration-login.spec.ts  # Playwright MCP 테스트 (TypeScript)
+│   └── signup-login.spec.js            # 예제 테스트 (JavaScript)
 ├── scenario/                       # 테스트 시나리오 문서
 │   └── signup-login.md             # 회원가입/로그인 시나리오
 ├── test-results/                   # 테스트 결과 (자동 생성)
@@ -96,49 +95,7 @@ playwright-mcp-tutorial/
 - **느린 모드**: 시연 및 디버깅용
 - **팝업/광고 차단**: 안정적인 테스트 환경
 
-### 주요 기능
-
-- ✅ **실시간 이메일 생성**: 타임스탬프 기반 고유 이메일
-- ✅ **완전한 사용자 플로우**: 회원가입 → 로그인 → 계정 삭제
-- ✅ **다국어 지원**: 한국어 테스트 데이터
-- ✅ **강력한 선택자**: Role-based 및 텍스트 기반 locator
-- ✅ **에러 처리**: 실패 시 스크린샷 및 비디오 캡처
-
-## 📝 테스트 시나리오
-
-### 회원가입 및 로그인 테스트
-
-1. **홈페이지 접속** - AutomationExercise 웹사이트 방문
-2. **회원가입 페이지 이동** - 'Signup / Login' 버튼 클릭
-3. **신규 사용자 등록** - 고유 이메일로 회원가입
-4. **계정 정보 입력** - 개인정보, 주소, 선택사항 입력
-5. **계정 생성 확인** - 성공 메시지 확인
-6. **로그인 상태 확인** - 사용자명 표시 확인
-7. **로그아웃/재로그인** - 로그인 기능 검증
-8. **계정 삭제** - 전체 플로우 완료
-
-### 테스트 데이터
-
-```typescript
-// 동적 이메일 생성
-const timestamp = new Date().toISOString().replace(/[-:.]/g, '').slice(0, 14)
-const testEmail = `testuser${timestamp}@example.com`
-
-// 테스트 사용자 정보
-const testPassword = 'testpassword123'
-const testName = '테스트사용자'
-```
-
 ## 🛠️ 개발 가이드
-
-### 새로운 테스트 추가
-
-1. `tests/` 디렉토리에 `.spec.ts` 파일 생성
-2. 시나리오를 `scenario/` 디렉토리에 문서화
-3. Playwright 모범 사례 준수:
-    - Role-based locator 사용
-    - 명시적 대기 (waitFor) 활용
-    - 페이지 객체 모델 고려
 
 ### 디버깅 팁
 
